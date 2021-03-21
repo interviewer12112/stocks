@@ -37,7 +37,7 @@ public class Driver {
             }
         }
         for (Trade trade: allTrades) {
-            System.out.println(trade);
+            System.out.println(String.format("%s %.2f %d %s", trade.getBuyOrderId(), trade.getSellPrice(), trade.getQuantity(), trade.getSellOrderId()));
         }
     }
 }
