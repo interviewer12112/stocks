@@ -1,7 +1,7 @@
 package org.example.stocks;
 
-import org.example.stocks.dao.IOrderStore;
-import org.example.stocks.dao.InMemoryOrderStore;
+import org.example.stocks.dao.IOrderBook;
+import org.example.stocks.dao.InMemoryOrderBook;
 import org.example.stocks.logic.OrderMatcher;
 import org.example.stocks.parser.IOrdersParser;
 import org.example.stocks.parser.OrdersParser;
@@ -15,12 +15,12 @@ public class Driver {
 
     private final IOrdersParser ordersParser;
     private final OrderMatcher orderMatcher;
-    private final IOrderStore orderStore;
+    private final IOrderBook orderbook;
 
     public Driver(String filePath) {
         ordersParser = new OrdersParser(filePath);
-        orderStore = new InMemoryOrderStore();
-        orderMatcher = new OrderMatcher(orderStore);
+        orderbook = new InMemoryOrderBook();
+        orderMatcher = new OrderMatcher(orderbook);
     }
 
     public void run() {
@@ -30,7 +30,7 @@ public class Driver {
             List<Trade> trades = orderMatcher.match(order);
             allTrades.addAll(trades);
             if (order.getQuantity() > 0) {
-                orderStore.addOrder(order);
+                orderbook.addOrder(order);
             }
         }
         for (Trade trade : allTrades) {

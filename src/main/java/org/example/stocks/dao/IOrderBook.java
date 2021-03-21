@@ -2,7 +2,7 @@ package org.example.stocks.dao;
 
 import org.example.stocks.types.Order;
 
-public interface IOrderStore {
+public interface IOrderBook {
 
     Order pollBuy(String stock);
     Order pollSell(String stock);

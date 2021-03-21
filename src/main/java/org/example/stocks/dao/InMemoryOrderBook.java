@@ -6,12 +6,12 @@ import org.example.stocks.logic.OrdersQueue;
 import org.example.stocks.types.Order;
 import org.example.stocks.types.Sort;
 
-public class InMemoryOrderStore implements IOrderStore {
+public class InMemoryOrderBook implements IOrderBook {
 
     private final OrdersQueue buyQueues;
     private final OrdersQueue sellQueues;
 
-    public InMemoryOrderStore() {
+    public InMemoryOrderBook() {
         buyQueues = new OrdersQueue(
                 new Sort(SortField.PRICE, SortOrder.DESC),
                 new Sort(SortField.TIME, SortOrder.ASC)
@@ -22,14 +22,17 @@ public class InMemoryOrderStore implements IOrderStore {
         );
     }
 
+    @Override
     public Order pollBuy(String stock) {
         return buyQueues.poll(stock);
     }
 
+    @Override
     public Order pollSell(String stock) {
         return sellQueues.poll(stock);
     }
 
+    @Override
     public boolean addOrder(Order order) {
         switch (order.getOrderType()) {
             case BUY:
