@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <springProfile>
+        <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>logs/stocks.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <maxFileSize>10MB</maxFileSize>
+                <totalSizeCap>20GB</totalSizeCap>
+                <maxHistory>10</maxHistory>
+            </rollingPolicy>
+        </appender>
+        <logger name="org.springframework" level="INFO"/>
+        <root level="INFO">
+            <appender-ref ref="FILE-ROLLING"/>
+        </root>
+    </springProfile>
+</configuration>
