@@ -5,13 +5,11 @@ import org.example.stocks.dao.IOrderStore;
 import org.example.stocks.enums.OrderType;
 import org.example.stocks.types.Order;
 import org.example.stocks.types.Trade;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Service
 @RequiredArgsConstructor
 public class OrderMatcher implements IOrderMatcher {
 

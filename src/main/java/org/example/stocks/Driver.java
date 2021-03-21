@@ -7,26 +7,23 @@ import org.example.stocks.parser.IOrdersParser;
 import org.example.stocks.parser.OrdersParser;
 import org.example.stocks.types.Order;
 import org.example.stocks.types.Trade;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-@Service
 public class Driver {
 
     private final IOrdersParser ordersParser;
     private final OrderMatcher orderMatcher;
     private final IOrderStore orderStore;
 
-    public Driver(OrderMatcher orderMatcher, IOrderStore orderStore) {
+    public Driver() {
         Scanner scanner = new Scanner(System.in);
         String filePath = scanner.nextLine();
-        System.out.println();
         ordersParser = new OrdersParser(filePath);
-        this.orderMatcher = orderMatcher;
-        this.orderStore = orderStore;
+        orderStore = new InMemoryOrderStore();
+        orderMatcher = new OrderMatcher(orderStore);
     }
 
     public void run() {

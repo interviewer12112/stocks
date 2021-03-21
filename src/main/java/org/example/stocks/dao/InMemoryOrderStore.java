@@ -5,9 +5,7 @@ import org.example.stocks.enums.SortOrder;
 import org.example.stocks.logic.OrdersQueue;
 import org.example.stocks.types.Order;
 import org.example.stocks.types.Sort;
-import org.springframework.stereotype.Service;
 
-@Service
 public class InMemoryOrderStore implements IOrderStore {
 
     private final OrdersQueue buyQueues;
