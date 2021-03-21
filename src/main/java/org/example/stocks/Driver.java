@@ -10,7 +10,6 @@ import org.example.stocks.types.Trade;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Driver {
 
@@ -18,9 +17,7 @@ public class Driver {
     private final OrderMatcher orderMatcher;
     private final IOrderStore orderStore;
 
-    public Driver() {
-        Scanner scanner = new Scanner(System.in);
-        String filePath = scanner.nextLine();
+    public Driver(String filePath) {
         ordersParser = new OrdersParser(filePath);
         orderStore = new InMemoryOrderStore();
         orderMatcher = new OrderMatcher(orderStore);
@@ -36,7 +33,7 @@ public class Driver {
                 orderStore.addOrder(order);
             }
         }
-        for (Trade trade: allTrades) {
+        for (Trade trade : allTrades) {
             System.out.println(String.format("%s %.2f %d %s", trade.getBuyOrderId(), trade.getSellPrice(), trade.getQuantity(), trade.getSellOrderId()));
         }
     }
